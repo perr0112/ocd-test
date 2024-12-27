@@ -46,7 +46,7 @@ class Person extends Model
         return $this->belongsToMany(
             Person::class,
             'relationships', 'parent_id', 'child_id'
-        );
+        )->where('parent_id', '!=', $this->id);
     }
 
     /**
@@ -58,7 +58,7 @@ class Person extends Model
         return $this->belongsToMany(
             Person::class,
             'relationships', 'child_id', 'parent_id'
-        );
+        )->where('child_id', '!=', $this->id);
     }
 
     /**
