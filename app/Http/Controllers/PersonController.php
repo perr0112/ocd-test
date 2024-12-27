@@ -29,4 +29,17 @@ class PersonController extends Controller
             'data' => $people,
         ]); */
     }
+
+    /**
+     * Affiche une personne avec ses relations
+     *
+     * @param $id
+     * @return PersonResource
+     */
+    public function show($id): PersonResource
+    {
+        $person = Person::with(['creator', 'children', 'parents'])->findOrFail($id);
+        return new PersonResource($person, true);
+    }
+
 }
